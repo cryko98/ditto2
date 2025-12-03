@@ -18,7 +18,7 @@ interface Message {
 const BuilderPanel: React.FC<BuilderPanelProps> = ({ isOpen, onToggle, onCodeGenerated }) => {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'model', text: 'Hi! I\'m Ditto 2.0. I can build apps or analyze Solana/EVM tokens. Drop a CA or describe your app!' }
+    { role: 'model', text: 'Hi! I\'m Ditto 2.0. I\'m ready to build your dream app. Just describe what you want to create!' }
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const chatSessionRef = useRef<ChatSession | null>(null);
