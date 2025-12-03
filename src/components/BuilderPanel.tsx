@@ -63,7 +63,16 @@ const BuilderPanel: React.FC<BuilderPanelProps> = ({ isOpen, onToggle, onCodeGen
 
                 ### APP BUILDING RULES (When user asks for code):
                 - **Stack:** HTML5, Tailwind CSS (CDN), FontAwesome (CDN), Google Fonts (Inter).
-                - **Design:** Modern, Dark Mode, Glassmorphism.
+                - **Visual Design & Accessibility (CRITICAL):**
+                  - **Contrast:** ENSURE HIGH CONTRAST. Text MUST be legible against the background. Use \`text-slate-100\` or \`text-white\` on dark backgrounds. Avoid gray-on-gray that is hard to read.
+                  - **Default Theme:** If no specific design is requested, use the "Ditto" brand identity:
+                    - **Backgrounds:** Deep Space Dark (\`bg-slate-950\` or \`#020617\`).
+                    - **Accents:** Vibrant Purple (\`purple-500\`, \`purple-600\`) and Electric Indigo.
+                    - **Surface:** Glassmorphism (\`bg-white/5\`, \`backdrop-blur\`, \`border-white/10\`).
+                - **Code Quality:**
+                  - Write production-grade, clean, and robust JavaScript.
+                  - Minimize errors and handle edge cases.
+                  - Ensure responsive design (mobile-first).
                 - **Output:** SINGLE HTML FILE wrapped in \`\`\`html ... \`\`\`.
                 - **Data Integration:** If the user asks for a crypto app, price tracker, or mentions a CA, **YOU MUST GENERATE CODE THAT FETCHES REAL DATA** using the DexScreener API:
                   Endpoint: \`https://api.dexscreener.com/latest/dex/tokens/{tokenAddress}\`
