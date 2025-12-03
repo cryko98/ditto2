@@ -1,2 +1,20 @@
-// This file is no longer used as we migrated to Create React App.
-// Please use standard react-scripts for building.
+import { defineConfig, loadEnv } from 'vite';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig(({ mode }) => {
+  // Load env file based on `mode` in the current working directory.
+  // Set the third parameter to '' to load all env regardless of the `VITE_` prefix.
+  const env = loadEnv(mode, (process as any).cwd(), '');
+  return {
+    plugins: [react()],
+    define: {
+      // Define process.env.API_KEY globally so it works in the browser
+      'process.env.API_KEY': JSON.stringify(env.API_KEY),
+      // Fallback for other process.env usage
+      'process.env': {}
+    },
+    server: {
+      port: 3000,
+    },
+  };
+});
