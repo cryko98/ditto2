@@ -3,7 +3,10 @@ import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, (process as any).cwd(), '');
+  // Use a fallback for process.cwd() to satisfy TypeScript in some environments
+  // Cast process to any to fix "Property 'cwd' does not exist on type 'Process'" error
+  const cwd = typeof process !== 'undefined' && (process as any).cwd ? (process as any).cwd() : '.';
+  const env = loadEnv(mode, cwd, '');
 
   return {
     plugins: [react()],
