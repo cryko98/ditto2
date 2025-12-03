@@ -11,7 +11,9 @@
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,  /* <--- EZ A LEGFONTOSABB SOR! */
+    "noEmit": true,
+    "declaration": false, /* Kifejezetten tiltjuk a .d.ts generálást */
+    "declarationMap": false,
     "jsx": "react-jsx",
 
     /* Linting */
