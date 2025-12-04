@@ -25,6 +25,7 @@ const App: React.FC = () => {
   const handleCodeGenerated = (code: string) => {
     setGeneratedCode(code);
     setViewMode('preview'); // Automatically switch to preview when new code arrives
+    // Builder stays open on mobile now (split view), so user can see preview update immediately
   };
 
   const clearApp = () => {
@@ -50,7 +51,7 @@ const App: React.FC = () => {
       <div className="flex-1 flex overflow-hidden">
           
           {/* Main Content Area */}
-          <div className={`flex-1 transition-all duration-300 flex flex-col relative ${isBuilderOpen ? 'mr-0 md:mr-[450px]' : ''}`}>
+          <div className={`flex-1 transition-all duration-300 flex flex-col relative ${isBuilderOpen ? 'mb-[50vh] md:mb-0 md:mr-[450px]' : ''}`}>
             
             {generatedCode ? (
                <div className="h-full w-full flex flex-col bg-[#0F172A]">
@@ -160,6 +161,17 @@ const App: React.FC = () => {
                 <span className="absolute right-full mr-4 top-1/2 -translate-y-1/2 px-4 py-2 bg-slate-900 text-white text-sm font-medium rounded-xl opacity-0 group-hover:opacity-100 transition-all whitespace-nowrap pointer-events-none border border-white/10 shadow-xl translate-x-2 group-hover:translate-x-0">
                     Open Builder
                 </span>
+                </button>
+            )}
+            
+            {/* Mobile FAB to re-open builder when looking at preview */}
+            {!isBuilderOpen && generatedCode && (
+                <button
+                onClick={() => setIsBuilderOpen(true)}
+                className="fixed bottom-6 right-6 p-3 bg-purple-600 hover:bg-purple-500 text-white rounded-full shadow-2xl shadow-purple-600/40 transition-all z-40 md:hidden"
+                aria-label="Continue Chat"
+                >
+                    <PenTool size={20} />
                 </button>
             )}
           </div>

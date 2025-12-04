@@ -224,12 +224,20 @@ const BuilderPanel: React.FC<BuilderPanelProps> = ({ isOpen, onToggle, onCodeGen
 
   return (
     <div 
-      className={`fixed top-0 right-0 h-full bg-[#050912]/95 border-l border-white/10 shadow-[0_0_80px_rgba(0,0,0,0.8)] transition-transform duration-300 cubic-bezier(0.4, 0, 0.2, 1) z-50 flex flex-col w-full md:w-[450px] backdrop-blur-xl ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
+      className={`fixed z-50 flex flex-col bg-[#050912]/95 backdrop-blur-xl shadow-2xl transition-transform duration-300 cubic-bezier(0.4, 0, 0.2, 1)
+        /* Mobile Styles (Bottom Sheet) */
+        bottom-0 left-0 w-full h-[50vh] border-t border-white/10 rounded-t-2xl
+        ${isOpen ? 'translate-y-0' : 'translate-y-full'}
+        
+        /* Desktop Styles (Side Panel) */
+        md:top-0 md:right-0 md:h-full md:w-[450px] md:border-l md:border-t-0 md:rounded-none md:translate-y-0
+        ${isOpen ? 'md:translate-x-0' : 'md:translate-x-full'}
+      `}
     >
-      {/* Side Toggle Handle */}
+      {/* Side Toggle Handle - Desktop Only */}
       <button 
         onClick={onToggle}
-        className="absolute left-0 top-1/2 -translate-x-full -translate-y-1/2 bg-[#050912] border-y border-l border-white/10 text-slate-400 hover:text-white p-2 rounded-l-xl shadow-[-10px_0_20px_rgba(0,0,0,0.2)] flex items-center justify-center w-8 h-16 group z-50 focus:outline-none"
+        className="hidden md:flex absolute left-0 top-1/2 -translate-x-full -translate-y-1/2 bg-[#050912] border-y border-l border-white/10 text-slate-400 hover:text-white p-2 rounded-l-xl shadow-[-10px_0_20px_rgba(0,0,0,0.2)] items-center justify-center w-8 h-16 group z-50 focus:outline-none"
         aria-label={isOpen ? "Close Builder" : "Open Builder"}
       >
         <div className="absolute inset-y-0 right-[-1px] w-[1px] bg-[#050912] z-10"></div>
@@ -241,7 +249,10 @@ const BuilderPanel: React.FC<BuilderPanelProps> = ({ isOpen, onToggle, onCodeGen
       </button>
 
       {/* Header */}
-      <div className="h-16 flex items-center justify-between px-6 border-b border-white/5 bg-white/[0.02] flex-shrink-0">
+      <div className="h-16 flex items-center justify-between px-6 border-b border-white/5 bg-white/[0.02] flex-shrink-0 relative">
+        {/* Mobile Drag Handle Visual */}
+        <div className="md:hidden absolute top-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-white/10 rounded-full"></div>
+
         <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 p-1.5 flex items-center justify-center">
                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png" alt="logo" className="w-full h-full object-contain" />
@@ -253,6 +264,15 @@ const BuilderPanel: React.FC<BuilderPanelProps> = ({ isOpen, onToggle, onCodeGen
                 </span>
             </div>
         </div>
+        
+        {/* Mobile Close Button */}
+        <button 
+            onClick={onToggle}
+            className="md:hidden p-2 text-slate-400 hover:text-white bg-white/5 hover:bg-white/10 rounded-lg transition-colors border border-white/5"
+            aria-label="Close Panel"
+        >
+            <X size={20} />
+        </button>
       </div>
 
       {/* Messages */}
