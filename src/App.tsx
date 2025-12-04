@@ -118,12 +118,15 @@ const App: React.FC = () => {
                   {/* Content Area */}
                   <div className="flex-1 overflow-hidden relative bg-[#020617]">
                     {viewMode === 'preview' ? (
-                        <iframe 
-                            srcDoc={generatedCode}
-                            className="w-full h-full bg-white border-none"
-                            title="Generated App"
-                            sandbox="allow-scripts allow-modals allow-forms allow-popups allow-same-origin"
-                        />
+                        /* Mobile-friendly iframe container: allows scrolling if iframe expands (iOS) or fits (Desktop) */
+                        <div className="w-full h-full overflow-y-auto -webkit-overflow-scrolling-touch">
+                            <iframe 
+                                srcDoc={generatedCode}
+                                className="w-full min-h-full bg-white border-none block"
+                                title="Generated App"
+                                sandbox="allow-scripts allow-modals allow-forms allow-popups allow-same-origin"
+                            />
+                        </div>
                     ) : (
                         <div className="w-full h-full overflow-hidden flex flex-col">
                             <div className="flex-1 relative">
