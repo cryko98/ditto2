@@ -224,13 +224,13 @@ const BuilderPanel: React.FC<BuilderPanelProps> = ({ isOpen, onToggle, onCodeGen
 
   return (
     <div 
-      className={`fixed z-50 flex flex-col bg-[#050912]/95 backdrop-blur-xl shadow-2xl transition-transform duration-300 cubic-bezier(0.4, 0, 0.2, 1)
+      className={`fixed z-[55] flex flex-col bg-[#050912]/95 backdrop-blur-xl shadow-2xl transition-transform duration-300 cubic-bezier(0.4, 0, 0.2, 1)
         /* Mobile Styles (Bottom Sheet) */
-        bottom-0 left-0 w-full h-[50vh] border-t border-white/10 rounded-t-2xl
+        bottom-0 left-0 w-full h-[50dvh] border-t border-white/10 rounded-t-2xl
         ${isOpen ? 'translate-y-0' : 'translate-y-full'}
         
         /* Desktop Styles (Side Panel) */
-        md:top-0 md:right-0 md:h-full md:w-[450px] md:border-l md:border-t-0 md:rounded-none md:translate-y-0
+        md:top-0 md:right-0 md:left-auto md:bottom-auto md:h-full md:w-[450px] md:border-l md:border-t-0 md:rounded-none md:translate-y-0
         ${isOpen ? 'md:translate-x-0' : 'md:translate-x-full'}
       `}
     >

@@ -33,7 +33,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-[#020617] flex flex-col font-sans">
+    <div className="relative h-[100dvh] w-full overflow-hidden bg-[#020617] flex flex-col font-sans">
       
       {/* Modal Layer */}
       <DeploymentModal 
@@ -51,7 +51,15 @@ const App: React.FC = () => {
       <div className="flex-1 flex overflow-hidden">
           
           {/* Main Content Area */}
-          <div className={`flex-1 transition-all duration-300 flex flex-col relative ${isBuilderOpen ? 'mb-[50vh] md:mb-0 md:mr-[450px]' : ''}`}>
+          <div 
+            className={`
+                flex flex-col relative transition-all duration-300
+                ${isBuilderOpen 
+                    ? 'h-[50dvh] md:h-full md:flex-1 md:mr-[450px]' 
+                    : 'h-full flex-1'
+                }
+            `}
+          >
             
             {generatedCode ? (
                <div className="h-full w-full flex flex-col bg-[#0F172A]">
@@ -118,11 +126,11 @@ const App: React.FC = () => {
                   {/* Content Area */}
                   <div className="flex-1 overflow-hidden relative bg-[#020617]">
                     {viewMode === 'preview' ? (
-                        /* Mobile-friendly iframe container: allows scrolling if iframe expands (iOS) or fits (Desktop) */
-                        <div className="w-full h-full overflow-y-auto -webkit-overflow-scrolling-touch">
+                        /* Use absolute positioning to force iframe to respect container boundaries and scroll internally */
+                        <div className="w-full h-full relative bg-white">
                             <iframe 
                                 srcDoc={generatedCode}
-                                className="w-full min-h-full bg-white border-none block"
+                                className="absolute inset-0 w-full h-full border-none"
                                 title="Generated App"
                                 sandbox="allow-scripts allow-modals allow-forms allow-popups allow-same-origin"
                             />
@@ -153,7 +161,7 @@ const App: React.FC = () => {
                </div>
             )}
             
-            {/* FAB: Only visible if builder is closed AND we are NOT in preview mode (preview has its own handle via BuilderPanel now if open, or FAB if closed) */}
+            {/* FAB: Only visible if builder is closed AND we are NOT in preview mode */}
             {!isBuilderOpen && !generatedCode && (
                 <button
                 onClick={() => setIsBuilderOpen(true)}
